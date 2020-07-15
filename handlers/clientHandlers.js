@@ -66,7 +66,7 @@ const handleDeleteClient = (req, res) => {
       .status(200)
       .json({ status: "200", message: "Client successfully deleted" });
   } else {
-    res.status(400).json({ status: "400", message: "No client with this ID" });
+    res.status(404).json({ status: "404", message: "No client with this ID" });
   }
 };
 

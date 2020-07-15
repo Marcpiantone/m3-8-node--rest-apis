@@ -7,6 +7,10 @@ const { handleClients } = require("./handlers/clientHandlers");
 const { handleClient } = require("./handlers/clientHandlers");
 const { handleNewClient } = require("./handlers/clientHandlers");
 const { handleDeleteClient } = require("./handlers/clientHandlers");
+const { handleTestWord } = require("./handlers/hangmanHandlers");
+const { handleRandomWord } = require("./handlers/hangmanHandlers");
+const { handleGuessLetter1stImplem } = require("./handlers/hangmanHandlers");
+const { handleGuessLetter2ndImplem } = require("./handlers/hangmanHandlers");
 
 // handles
 
@@ -15,7 +19,7 @@ const handle404 = (req, res) => {
 };
 
 const handleHomepage = (req, res) => {
-  res.status(200).send("Welcome ! Try /clients");
+  res.status(200).send("Welcome ! Try /clients or /hangman");
 };
 
 express()
@@ -32,7 +36,8 @@ express()
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: false }))
 
-  // endpoints
+  // endpoints E2
+
   .get("/", handleHomepage)
 
   .get("/clients", handleClients)
@@ -40,6 +45,13 @@ express()
 
   .get("/clients/:id", handleClient)
   .delete("/clients/:id", handleDeleteClient)
+
+  // endpoints E3
+  .get("/hangman/words/:id", handleTestWord)
+
+  .get("/hangman/words", handleRandomWord)
+
+  .get("/hangman/guess/:id/:letter", handleGuessLetter2ndImplem)
 
   .get("*", handle404)
 
